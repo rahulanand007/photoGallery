@@ -30,6 +30,15 @@ const userSchema = new mongoose.Schema({
         type:String,
         default:"user",
     },
+    client_id:{
+        type:String,
+    },
+    client_secret:{
+        type:String,
+    },
+    redirect_uri:{
+        type:String,
+    }
 },{ timestamps: true }) 
 
 

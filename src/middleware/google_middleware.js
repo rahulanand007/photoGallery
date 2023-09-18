@@ -10,12 +10,15 @@ dotenv.config();
 
 const setCreds = async (req, res, next) => {
   try {
-    console.log(req.user._id)
+
+    if(!req.user.client_id || !req.user.client_secret || req.user.redirect_uri){
+      return res.send("Missing Oauth client params")
+    }
 
     const oauth2Client = new google.auth.OAuth2(
-      process.env.CLIENT_ID, /////LATER HAVE TO CHANGE THIS SO THAT IT COMES FROM DATABASE FOR SPECIFIC USER
-      process.env.CLIENT_SECRET, //
-      process.env.REDIRECT_URI //
+      req.user.client_id, /////LATER HAVE TO CHANGE THIS SO THAT IT COMES FROM DATABASE FOR SPECIFIC USER
+      req.user.client_secret, //
+      req.user.redirect_uri //
     );
     
     //Set Refresh Token
